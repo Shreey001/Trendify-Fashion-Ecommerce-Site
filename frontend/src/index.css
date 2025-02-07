@@ -1,5 +1,21 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Outfit:wght@100..900&display=swap');
 
 a.active hr{
 display: block;
+}
+/* *{
+font-family: Outfit;
+} */
+.geist-mono {
+    font-family: "Geist Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Replace with desired weight */
+    font-style: normal;
+  }
+
+  @media (max-width: 640px) {
+a.active {
+background-color: black;
+color: white;}  
 }
