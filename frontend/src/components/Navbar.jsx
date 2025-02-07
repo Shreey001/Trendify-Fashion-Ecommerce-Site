@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
-            <img src={assets.logo} className='w-60 h-20' alt="" />
+            <img src={assets.logo} className='w-35 h-15 sm:w-60 sm:h-20 ' alt="" />
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700' >
                 {/* Home menu */}
                 <NavLink to='/' className='flex flex-col items-center gap-1'  >
@@ -52,7 +52,7 @@ const Navbar = () => {
                 <Link to='/cart' className='relative'>
                     <img src={assets.cart_icon} className='w-6 min-w-5' alt="" />
                     {/* card number of procucts added */}
-                    <p className='absolute right-[-6px] bottom-4 w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[10px]  '  >10</p>
+                    <p className='absolute right-[-6px] bottom-4 w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[10px]  '> 10 </p>
                 </Link>
                 {/* add  vertical menu for smaller devices */}
                 
