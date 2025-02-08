@@ -98,7 +98,7 @@ export const assets = {
 export const products = [
     {
         _id: "aaaaa",
-        name: "Women Round Neck Cotton Top",
+        name: "DAZY Floral Print Off Shoulder Crop Blouse",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 100,
         image: [p_img1],
@@ -122,7 +122,7 @@ export const products = [
     },
     {
         _id: "aaaac",
-        name: "Girls Round Neck Cotton Top",
+        name: "Green Velvet Embroidered Kurta",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 220,
         image: [p_img3],
@@ -146,7 +146,7 @@ export const products = [
     },
     {
         _id: "aaaae",
-        name: "Women Round Neck Cotton Top",
+        name: "Twisted Tee Shirt Top - WHITE / M",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 130,
         image: [p_img5],
@@ -158,7 +158,7 @@ export const products = [
     },
     {
         _id: "aaaaf",
-        name: "Girls Round Neck Cotton Top",
+        name: "Ditsy Floral Puff Sleeve Shirred Blouse",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 140,
         image: [p_img6],
@@ -182,7 +182,7 @@ export const products = [
     },
     {
         _id: "aaaah",
-        name: "Men Round Neck Pure Cotton T-shirt",
+        name: "Winter Style Guide Essential Outfit",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 140,
         image: [p_img8],
@@ -198,7 +198,7 @@ export const products = [
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 100,
         image: [p_img9],
-        category: "Kids",
+        category: "Women",
         subCategory: "Topwear",
         sizes: ["M", "L", "XL"],
         date: 1716621235448,
@@ -206,12 +206,12 @@ export const products = [
     },
     {
         _id: "aaaaj",
-        name: "Men Tapered Fit Flat-Front Trousers",
+        name: "Basic Round Neck Silket Tee_Pink",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 110,
         image: [p_img10],
-        category: "Men",
-        subCategory: "Bottomwear",
+        category: "Women",
+        subCategory: "Topwear",
         sizes: ["S", "L", "XL"],
         date: 1716622235448,
         bestseller: false
@@ -242,7 +242,7 @@ export const products = [
     },
     {
         _id: "aaaam",
-        name: "Women Round Neck Cotton Top",
+        name: "Solid Ribbed Knit Round Neck Tee",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 130,
         image: [p_img13],
@@ -326,7 +326,7 @@ export const products = [
     },
     {
         _id: "aaaat",
-        name: "Women Palazzo Pants with Waist Belt",
+        name: "T-shirt con mezza zip e stampa a righe",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 190,
         image: [p_img20],
@@ -338,7 +338,7 @@ export const products = [
     },
     {
         _id: "aaaau",
-        name: "Women Zip-Front Relaxed Fit Jacket",
+        name: "Striped Contrast Collar Half Zip Tee",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 170,
         image: [p_img21],
