@@ -54,6 +54,24 @@ const Footer = () => {
 export default Footer
 
 
+const styles = `
+@keyframes swing {
+    0% {
+        transform: rotate(-8deg);
+    }
+    100% {
+        transform: rotate(8deg);
+    }
+}
+`;
+
+
+const styleSheet = document.createElement("style");
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
+
+
 
 
 
