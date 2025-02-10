@@ -45,7 +45,7 @@ const About = () => {
                     </div>
                     <div className='lg:w-1/2'>
                         <img 
-                            src={assets.hero_img} 
+                            src={assets.about_img} 
                             alt="Our Story" 
                             className='rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300'
                         />
@@ -90,7 +90,7 @@ const About = () => {
                     <h3 className='text-2xl font-bold mb-8'>Our Team</h3>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
                         {[
-                            { name: 'Shreeyjan Dhakal', role: 'Founder & CEO' },
+                            { name: 'Shreeyjan Bhattarai', role: 'Founder & CEO' },
                             { name: 'Anish Shrestha', role: 'Creative Director' },
                             { name: 'Prashant Raj', role: 'Head of Operations' },
                             { name: 'Sushant Kumar', role: 'Customer Relations' }
@@ -98,7 +98,7 @@ const About = () => {
                             <div key={index} className='group'>
                                 <div className='relative mb-4 rounded-xl overflow-hidden'>
                                     <img 
-                                        src={assets.profile_icon} 
+                                        src={assets.ceo} 
                                         alt={member.name}
                                         className='w-full aspect-square object-cover transition-transform duration-300
                                                  group-hover:scale-110'
