@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets'
+import RelatedProducts from "../components/RelatedProducts.jsx";
 
 const Product = () => {
-    const { products, currency } = useContext(ShopContext)
+    const { products, currency,addToCart } = useContext(ShopContext)
     const { productId } = useParams()
     const [productData, setProductData] = useState(false)
     const [image, setImage] = useState('')
@@ -159,7 +160,9 @@ const Product = () => {
                         </div>
                     </div>
 
-                    <button className='w-full sm:w-auto px-12 py-4 bg-black text-white rounded-full font-medium
+                    <button
+                        onClick={() =>addToCart(productData._id,size)}
+                        className='w-full sm:w-auto px-12 py-4 bg-black text-white rounded-full font-medium
                                      transition-all duration-300 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5'>
                         ADD TO CART
                     </button>
@@ -302,6 +305,9 @@ const Product = () => {
                     )}
                 </div>
             </div>
+        {/* ----------------------------   Related Products display-----------------------*/}
+            <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
+
         </div>
     ) : <div className='opacity-0'></div>
 }

@@ -5,7 +5,7 @@ import { ShopContext } from '../context/ShopContext'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
-    const { setShowSearch } = useContext(ShopContext)
+    const { setShowSearch,getCartCount } = useContext(ShopContext)
 
     return (
         <>
@@ -101,10 +101,13 @@ const Navbar = () => {
 
                             <Link to='/cart' className='relative p-2 hover:bg-white/50 rounded-full transition-all duration-300'>
                                 <img src={assets.cart_icon} className='w-5 min-w-5 hover:opacity-70 transition-opacity duration-300' alt="" />
-                                <span className='absolute right-1 top-1 w-4 h-4 flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] rounded-full animate-bounce '>
-                                    15
-                                </span>
+                                {getCartCount() > 0 && (
+                                    <span className='absolute right-1 top-1 w-4 h-4 flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] rounded-full animate-bounce'>
+            {getCartCount()}
+        </span>
+                                )}
                             </Link>
+
 
                             <button 
                                 onClick={() => setVisible(true)}

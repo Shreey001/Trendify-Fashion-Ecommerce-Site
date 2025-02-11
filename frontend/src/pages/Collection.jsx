@@ -162,7 +162,7 @@ setFilterProducts(productsCopy);
           {/* Sort Dropdown with updated styling */}
           <select 
             onChange={(e) => setSortType(e.target.value)}
-            className='px-4 py-2 border border-gray-300 rounded-full text-sm hover:border-pink-500 
+            className='px-4 py-2 border border-gray-300 rounded-full text-sm hover:border-pink-500
                      focus:outline-none focus:border-pink-500 transition-colors duration-300'
           >
             <option value='relavant'>Sort by: Relevant</option>
