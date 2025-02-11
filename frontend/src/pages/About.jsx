@@ -87,27 +87,88 @@ const About = () => {
 
                 {/* Team Section */}
                 <div className='text-center mb-12'>
-                    <h3 className='text-2xl font-bold mb-8'>Our Team</h3>
+                    <h3 className='text-2xl font-bold mb-8'>Meet Our Team</h3>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
                         {[
-                            { name: 'Shreeyjan Bhattarai', role: 'Founder & CEO' },
-                            { name: 'Anish Shrestha', role: 'Creative Director' },
-                            { name: 'Prashant Raj', role: 'Head of Operations' },
-                            { name: 'Sushant Kumar', role: 'Customer Relations' }
+                            { 
+                                name: 'Shreejan Bhattarai', 
+                                role: 'Founder & CEO',
+                                image: assets.team_member1,
+                                social: {
+                                    linkedin: 'https://www.linkedin.com/in/shreejan-bhattarai/',
+                                    twitter: 'https://x.com/shreeyjan001',
+                                    instagram: 'https://www.instagram.com/i_am_shreey001/'
+                                }
+                            },
+                            { 
+                                name: 'Kiran Parajuli', 
+                                role: 'Creative Director',
+                                image: assets.team_member2,
+                                social: {
+                                    linkedin: 'https://www.linkedin.com/in/kiran-parajuli-550ab2349/',
+                                    twitter: 'https://x.com/KIRAN20809396',
+                                    instagram: 'https://www.instagram.com/kiran.parajuli.754/'
+                                }
+                            },
+                            { 
+                                name: 'Anish Acharya', 
+                                role: 'Head of Operations',
+                                image: assets.team_member3,
+                                social: {
+                                    linkedin: 'https://www.linkedin.com/in/anish-acharya-819755212/',
+                                    twitter: '#',
+                                    instagram: 'https://www.instagram.com/iamanish_acharya/'
+                                }
+                            },
+                            { 
+                                name: 'Ujjwal Bhandari', 
+                                role: 'Customer Relations',
+                                image: assets.team_member4,
+                                social: {
+                                    linkedin: 'https://www.linkedin.com/in/ujjwalbhandarii/',
+                                    twitter: 'https://x.com/ujjwalbhandarii',
+                                    instagram: 'https://www.instagram.com/ujjwalbhandarri/'
+                                }
+                            }
                         ].map((member, index) => (
                             <div key={index} className='group'>
-                                <div className='relative mb-4 rounded-xl overflow-hidden'>
+                                <div className='relative mb-4 rounded-xl overflow-hidden bg-gradient-to-b from-pink-50 to-white'>
                                     <img 
-                                        src={assets.ceo} 
+                                        src={member.image} 
                                         alt={member.name}
-                                        className='w-full aspect-square object-cover transition-transform duration-300
+                                        className='w-full aspect-square object-cover transition-transform duration-500
                                                  group-hover:scale-110'
                                     />
-                                    <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent 
-                                                  opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+                                    <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                                                  opacity-0 group-hover:opacity-100 transition-all duration-500
+                                                  flex items-end justify-center pb-6'>
+                                        <div className='flex gap-4'>
+                                            {Object.entries(member.social).map(([platform, link]) => (
+                                                <a 
+                                                    key={platform}
+                                                    href={link}
+                                                    className='w-8 h-8 rounded-full bg-white/90 flex items-center justify-center
+                                                             transform -translate-y-4 opacity-0 group-hover:translate-y-0 
+                                                             group-hover:opacity-100 transition-all duration-300
+                                                             hover:bg-pink-50'
+                                                    style={{
+                                                        transitionDelay: `${Object.keys(member.social).indexOf(platform) * 100}ms`
+                                                    }}
+                                                >
+                                                    <img 
+                                                        src={assets[`${platform}_icon`]} 
+                                                        alt={platform} 
+                                                        className='w-4 h-4'
+                                                    />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
-                                <h4 className='font-semibold text-gray-900'>{member.name}</h4>
-                                <p className='text-sm text-gray-600'>{member.role}</p>
+                                <div className='space-y-1 group-hover:translate-y-1 transition-transform duration-300'>
+                                    <h4 className='font-semibold text-gray-900'>{member.name}</h4>
+                                    <p className='text-sm text-pink-500'>{member.role}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -118,3 +179,4 @@ const About = () => {
 }
 
 export default About
+
