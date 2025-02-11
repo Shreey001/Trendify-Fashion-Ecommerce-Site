@@ -65,7 +65,7 @@ const Navbar = () => {
                             >
                                 <img
                                     src={assets.search_icon} 
-                                    className='w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
+                                    className='w-5 ml-2 sm:ml-0 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                     alt="" 
                                 />
                             </button>
@@ -74,7 +74,7 @@ const Navbar = () => {
                                 <button className='p-2 hover:bg-white/50 rounded-full transition-all duration-300'>
                                     <img 
                                         src={assets.profile_icon} 
-                                        className='w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
+                                        className='w-8 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                         alt="" 
                                     />
                                 </button>
@@ -100,7 +100,7 @@ const Navbar = () => {
                             </div>
 
                             <Link to='/cart' className='relative p-2 hover:bg-white/50 rounded-full transition-all duration-300'>
-                                <img src={assets.cart_icon} className='w-5 min-w-5 hover:opacity-70 transition-opacity duration-300' alt="" />
+                                <img src={assets.cart_icon} className='w-5  min-w-5 hover:opacity-70 transition-opacity duration-300' alt="" />
                                 {getCartCount() > 0 && (
                                     <span className='absolute right-1 top-1 w-4 h-4 flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white text-[10px] rounded-full animate-bounce'>
             {getCartCount()}
