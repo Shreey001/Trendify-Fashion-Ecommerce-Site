@@ -28,7 +28,7 @@ const PlaceOrder = () => {
           {/* Left Side - Delivery Information */}
           <div className='lg:w-2/3'>
             <div className='bg-white rounded-xl shadow-sm border border-gray-100 p-6'>
-              <h3 className='text-xl font-bold text-gray-900 mb-6'>Delivery Information</h3>
+              <h3 className='text-2xl font-bold text-gray-900 mb-6'>Delivery Information</h3>
               
               <div className='space-y-6'>
                 {/* Name Fields */}
@@ -39,7 +39,7 @@ const PlaceOrder = () => {
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='John'
+                      placeholder='Ram'
                     />
                   </div>
                   <div>
@@ -48,7 +48,7 @@ const PlaceOrder = () => {
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='Doe'
+                      placeholder='Bahadur'
                     />
                   </div>
                 </div>
@@ -61,7 +61,7 @@ const PlaceOrder = () => {
                       type='email' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='john@example.com'
+                      placeholder='ramey@gmail.com'
                     />
                   </div>
                   <div>
@@ -82,7 +82,7 @@ const PlaceOrder = () => {
                     type='text' 
                     className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                              focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                    placeholder='123 Main St'
+                    placeholder='Pallo Galli'
                   />
                 </div>
 
@@ -93,7 +93,7 @@ const PlaceOrder = () => {
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='Kathmandu'
+                      placeholder='Butwali'
                     />
                   </div>
                   <div>
@@ -102,7 +102,7 @@ const PlaceOrder = () => {
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='Bagmati'
+                      placeholder='Lumbini'
                     />
                   </div>
                   <div>
@@ -111,7 +111,7 @@ const PlaceOrder = () => {
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='44600'
+                      placeholder='363636'
                     />
                   </div>
                   <div>
@@ -134,14 +134,14 @@ const PlaceOrder = () => {
               <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
                 <div 
                   onClick={() => setMethod('stripe')}
-                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-300
+                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer 
                             ${method === 'stripe' 
-                              ? 'border-pink-500 bg-pink-50/50' 
-                              : 'border-gray-200 hover:border-pink-200'}`}
+                              ? 'border-indigo-500 bg-indigo-50/50' 
+                              : 'border-gray-200 hover:border-indigo-500'}`}
                 >
-                  <div className={`w-4 h-4 rounded-full border-2 transition-colors duration-300
+                  <div className={`w-4 h-4 rounded-full border-2 
                                 ${method === 'stripe' 
-                                  ? 'border-pink-500 bg-pink-500' 
+                                  ? 'border-indigo-500 bg-indigo-500' 
                                   : 'border-gray-300'}`} 
                   />
                   <img className='h-6' src={assets.stripe_logo} alt='Stripe' />
@@ -149,14 +149,14 @@ const PlaceOrder = () => {
 
                 <div 
                   onClick={() => setMethod('razorpay')}
-                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-300
+                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer
                             ${method === 'razorpay' 
-                              ? 'border-pink-500 bg-pink-50/50' 
+                              ? 'border-blue-500 bg-blue-50/50' 
                               : 'border-gray-200 hover:border-pink-200'}`}
                 >
-                  <div className={`w-4 h-4 rounded-full border-2 transition-colors duration-300
+                  <div className={`w-4 h-4 rounded-full border-2
                                 ${method === 'razorpay' 
-                                  ? 'border-pink-500 bg-pink-500' 
+                                  ? 'border-blue-500 bg-blue-500' 
                                   : 'border-gray-300'}`} 
                   />
                   <img className='h-6' src={assets.razorpay_logo} alt='Razorpay' />
@@ -164,12 +164,12 @@ const PlaceOrder = () => {
 
                 <div 
                   onClick={() => setMethod('cod')}
-                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-300
+                  className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer 
                             ${method === 'cod' 
                               ? 'border-pink-500 bg-pink-50/50' 
                               : 'border-gray-200 hover:border-pink-200'}`}
                 >
-                  <div className={`w-4 h-4 rounded-full border-2 transition-colors duration-300
+                  <div className={`w-4 h-4 rounded-full border-2 
                                 ${method === 'cod' 
                                   ? 'border-pink-500 bg-pink-500' 
                                   : 'border-gray-300'}`} 
