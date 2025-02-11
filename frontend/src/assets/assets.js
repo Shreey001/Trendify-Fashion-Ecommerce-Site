@@ -73,7 +73,6 @@ import contact_img from './contact_img.png'
 import razorpay_logo from './razorpay_logo.png'
 import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
-import ceo from './ceo.png'
 import facebook_icon from './facebook_icon.png'
 import instagram_icon from './instagram_icon.png'
 import twitter_icon from './twitter_icon.png'
@@ -82,7 +81,7 @@ import team_member1 from './team_member1.png'
 import   team_member2 from './team_member2.png'
 import   team_member3 from './team_member3.png'
 import   team_member4 from './team_member4.png'
-
+import visit from './visit.png'
 
 export const assets = {
     logo,
@@ -103,7 +102,8 @@ export const assets = {
     razorpay_logo,
     stripe_logo,
     cross_icon,
-    ceo,
+
+
     facebook_icon,
     instagram_icon,
     twitter_icon,
@@ -111,7 +111,7 @@ export const assets = {
     team_member1,
     team_member2,
     team_member3,
-    team_member4
+    team_member4,visit
 }
 
 export const products = [

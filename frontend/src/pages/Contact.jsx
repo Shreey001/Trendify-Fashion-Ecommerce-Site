@@ -88,9 +88,9 @@ const Contact = () => {
                 <div className='group p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300
                                           border border-gray-100 hover:border-pink-100'>
                   <div className='flex items-center gap-4'>
-                    <div className='w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center
+                    <div className='w-15 h-15 rounded-full bg-pink-50 flex items-center justify-center
                                                   group-hover:bg-pink-100 transition-colors duration-300'>
-                      <img src={assets.support_img} className='w-6 h-6' alt="" />
+                      <img src={assets.support_img} className='w-8 h-8' alt="" />
                     </div>
                     <div>
                       <h4 className='text-lg font-semibold'>Customer Support</h4>
@@ -103,9 +103,9 @@ const Contact = () => {
                 <div className='group p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300
                                           border border-gray-100 hover:border-pink-100'>
                   <div className='flex items-center gap-4'>
-                    <div className='w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center
+                    <div className='w-15 h-15 rounded-full bg-pink-50 flex items-center justify-center
                                                   group-hover:bg-pink-100 transition-colors duration-300'>
-                      <img src={assets.quality_icon} className='w-6 h-6' alt="" />
+                      <img src={assets.visit} className='w-9 h-9' alt="" />
                     </div>
                     <div>
                       <h4 className='text-lg font-semibold'>Visit Us</h4>
