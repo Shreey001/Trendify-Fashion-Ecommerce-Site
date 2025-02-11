@@ -82,6 +82,7 @@ import   team_member2 from './team_member2.png'
 import   team_member3 from './team_member3.png'
 import   team_member4 from './team_member4.png'
 import visit from './visit.png'
+import empty_cart from './empty_cart.png'
 
 export const assets = {
     logo,
@@ -111,7 +112,9 @@ export const assets = {
     team_member1,
     team_member2,
     team_member3,
-    team_member4,visit
+    team_member4,
+    visit,
+    empty_cart
 }
 
 export const products = [
