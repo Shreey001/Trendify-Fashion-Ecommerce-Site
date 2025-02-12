@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets'
 
 const About = () => {
-    return (
+  return (
         <div className='py-12 px-4 sm:px-6 lg:px-8'>
             {/* Header Section */}
             <div className='text-center py-12 relative mb-16'>
@@ -174,8 +174,8 @@ const About = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default About

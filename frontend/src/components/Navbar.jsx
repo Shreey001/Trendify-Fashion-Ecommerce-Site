@@ -45,7 +45,7 @@ const Navbar = () => {
                                                    ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
                                     </span>
                                 </p>
-                            </NavLink>
+                </NavLink>
 
                             <NavLink 
                                 to='/collection' 
@@ -64,7 +64,7 @@ const Navbar = () => {
                                                    ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
                                     </span>
                                 </p>
-                            </NavLink>
+                </NavLink>
 
                             <NavLink 
                                 to='/about' 
@@ -83,7 +83,7 @@ const Navbar = () => {
                                                    ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
                                     </span>
                                 </p>
-                            </NavLink>
+                </NavLink>
 
                             <NavLink 
                                 to='/contact' 
@@ -102,7 +102,7 @@ const Navbar = () => {
                                                    ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
                                     </span>
                                 </p>
-                            </NavLink>
+                </NavLink>
                         </ul>
 
                         {/* Right Icons */}
@@ -120,11 +120,12 @@ const Navbar = () => {
                             
                             <div className='group relative z-50'>
                                 <button className='p-2 hover:bg-pink-300 rounded-full transition-all duration-300'>
-                                    <img 
+                                  <Link to="/login"> <img 
                                         src={assets.profile_icon} 
                                         className='w-8 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                         alt="" 
-                                    />
+                                    /> 
+                                </Link>
                                 </button>
                                 <div className='invisible group-hover:visible opacity-0 group-hover:opacity-100 
                                                 absolute dropdown-menu right-0 top-full mt-1
@@ -144,9 +145,9 @@ const Navbar = () => {
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
 
                             <Link to='/cart' className='relative p-2 hover:bg-white/50 rounded-full transition-all duration-300'>
                                 <img src={assets.cart_icon} className='w-5  min-w-5 hover:opacity-70 transition-opacity duration-300' alt="" />
@@ -155,7 +156,7 @@ const Navbar = () => {
             {getCartCount()}
         </span>
                                 )}
-                            </Link>
+                </Link>
 
 
                             <button 
@@ -168,7 +169,7 @@ const Navbar = () => {
                                     alt="" 
                                 />
                             </button>
-                        </div>
+            </div>
 
                         {/* Mobile Menu */}
                         <div className={`fixed inset-0 bg-black/50 transition-opacity duration-300 z-[60] 
@@ -176,35 +177,35 @@ const Navbar = () => {
                             <div className={`absolute top-0 right-0 bottom-0 w-64 bg-white shadow-xl 
                                             transition-transform duration-300 
                                             ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
-                                <div className='flex flex-col text-gray-600'>
+                <div className='flex flex-col text-gray-600'>
                                     <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-50'>
-                                        <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />
-                                        <p>Back</p>
-                                    </div>
+                  <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />
+                   <p>Back</p>
+                    </div>   
                                     
-                                    <NavLink onClick={() => setVisible(false)}
+                    <NavLink onClick={() => setVisible(false)}
                                         to='/' className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200'>
-                                        <p>HOME</p>
-                                    </NavLink>
+                        <p>HOME</p>
+                    </NavLink>
 
-                                    <NavLink onClick={() => setVisible(false)}
+                    <NavLink onClick={() => setVisible(false)}
                                         to='/collection' className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200'>
-                                        <p>COLLECTION</p>
-                                    </NavLink>
+                        <p>COLLECTION</p>
+                    </NavLink>
 
-                                    <NavLink onClick={() => setVisible(false)}
+                    <NavLink onClick={() => setVisible(false)}
                                         to='/about' className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200'>
-                                        <p>ABOUT</p>
-                                    </NavLink>
-
-                                    <NavLink onClick={() => setVisible(false)}
+                        <p>ABOUT</p>
+                    </NavLink>
+                    
+                    <NavLink onClick={() => setVisible(false)}
                                         to='/contact' className='py-4 px-6 border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200'>
-                                        <p>CONTACT</p>
-                                    </NavLink>
+                        <p>CONTACT</p>
+                    </NavLink>
                                 </div>
                             </div>
                         </div>
-                    </div>
+            </div>
 
                     {/* Enhanced Bottom Border Effect */}
                     <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/20 to-transparent z-40'></div>
