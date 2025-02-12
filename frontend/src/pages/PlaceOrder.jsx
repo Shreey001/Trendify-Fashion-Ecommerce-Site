@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import OrderInfo from '../components/OrderInfo'
+import { ShopContext } from '../context/ShopContext'
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState('cod')
@@ -17,6 +18,9 @@ const PlaceOrder = () => {
     country: ''
   })
 
+  const { navigate } = useContext(ShopContext);
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -24,6 +28,7 @@ const PlaceOrder = () => {
       [name]: value
     }))
   }
+
 
   return (
     <div className='min-h-screen bg-gray-50/30'>
@@ -232,7 +237,7 @@ const PlaceOrder = () => {
             <div className='bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-24'>
               <OrderInfo formData={formData} />
               <CartTotal />
-              <button
+              <button onClick={()=>navigate('/orders')}
                 className='w-full mt-6 bg-black text-white rounded-full py-3 px-8 font-medium
                          transition-all duration-300 hover:bg-gray-800 hover:shadow-lg 
                          hover:-translate-y-0.5 focus:ring-2 focus:ring-gray-200'
