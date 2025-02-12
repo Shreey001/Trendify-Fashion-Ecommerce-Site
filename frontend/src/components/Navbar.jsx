@@ -122,7 +122,7 @@ const Navbar = () => {
                                 <button className='p-2 hover:bg-pink-300 rounded-full transition-all duration-300'>
                                     <img 
                                         src={assets.profile_icon} 
-                                        className='w-5 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
+                                        className='w-8 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                         alt="" 
                                     />
                                 </button>
