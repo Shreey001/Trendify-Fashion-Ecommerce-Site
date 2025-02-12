@@ -5,7 +5,7 @@ import { ShopContext } from '../context/ShopContext'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
-    const { setShowSearch,getCartCount } = useContext(ShopContext)
+    const { setShowSearch, getCartCount } = useContext(ShopContext)
 
     return (
         <>
@@ -28,31 +28,79 @@ const Navbar = () => {
 
                         {/* Desktop Navigation */}
                         <ul className='hidden sm:flex gap-8 text-sm font-medium text-gray-700'>
-                            <NavLink to='/' className='group flex flex-col items-center transition-colors duration-300 hover:text-pink-500'>
+                            <NavLink 
+                                to='/' 
+                                className={({ isActive }) => `
+                                    group flex flex-col items-center transition-colors duration-300 
+                                    ${isActive ? 'text-pink-500' : 'hover:text-pink-500'}
+                                `}
+                            >
                                 <p className='relative px-2 py-1 rounded-full hover:bg-white/50 transition-all duration-300'>
                                     HOME
-                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full'></span>
+                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300 group-hover:w-full'>
+                                    </span>
+                                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300
+                                                   ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
+                                    </span>
                                 </p>
                             </NavLink>
 
-                            <NavLink to='/collection' className='group flex flex-col items-center transition-colors duration-300 hover:text-pink-500'>
+                            <NavLink 
+                                to='/collection' 
+                                className={({ isActive }) => `
+                                    group flex flex-col items-center transition-colors duration-300 
+                                    ${isActive ? 'text-pink-500' : 'hover:text-pink-500'}
+                                `}
+                            >
                                 <p className='relative px-2 py-1 rounded-full hover:bg-white/50 transition-all duration-300'>
                                     COLLECTION
-                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full'></span>
+                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300 group-hover:w-full'>
+                                    </span>
+                                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300
+                                                   ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
+                                    </span>
                                 </p>
                             </NavLink>
 
-                            <NavLink to='/about' className='group flex flex-col items-center transition-colors duration-300 hover:text-pink-500'>
+                            <NavLink 
+                                to='/about' 
+                                className={({ isActive }) => `
+                                    group flex flex-col items-center transition-colors duration-300 
+                                    ${isActive ? 'text-pink-500' : 'hover:text-pink-500'}
+                                `}
+                            >
                                 <p className='relative px-2 py-1 rounded-full hover:bg-white/50 transition-all duration-300'>
                                     ABOUT
-                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full'></span>
+                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300 group-hover:w-full'>
+                                    </span>
+                                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300
+                                                   ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
+                                    </span>
                                 </p>
                             </NavLink>
 
-                            <NavLink to='/contact' className='group flex flex-col items-center transition-colors duration-300 hover:text-pink-500'>
+                            <NavLink 
+                                to='/contact' 
+                                className={({ isActive }) => `
+                                    group flex flex-col items-center transition-colors duration-300 
+                                    ${isActive ? 'text-pink-500' : 'hover:text-pink-500'}
+                                `}
+                            >
                                 <p className='relative px-2 py-1 rounded-full hover:bg-white/50 transition-all duration-300'>
                                     CONTACT
-                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full'></span>
+                                    <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300 group-hover:w-full'>
+                                    </span>
+                                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-500 
+                                                   transition-all duration-300
+                                                   ${({ isActive }) => isActive ? 'w-full' : 'w-0'}`}>
+                                    </span>
                                 </p>
                             </NavLink>
                         </ul>
@@ -70,11 +118,11 @@ const Navbar = () => {
                                 />
                             </button>
                             
-                            <div className='group relative'>
-                                <button className='p-2 hover:bg-white/50 rounded-full transition-all duration-300'>
+                            <div className='group relative z-50'>
+                                <button className='p-2 hover:bg-pink-300 rounded-full transition-all duration-300'>
                                     <img 
                                         src={assets.profile_icon} 
-                                        className='w-8 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
+                                        className='w-5 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                         alt="" 
                                     />
                                 </button>
@@ -83,17 +131,18 @@ const Navbar = () => {
                                                 transition-all duration-300 transform origin-top scale-95 group-hover:scale-100'>
                                     <div className='relative pt-2'>
                                         <div className='absolute -top-0 right-4 w-4 h-4 bg-white/90 transform rotate-45 border-l border-t border-white/20'></div>
-                                        <div className='relative flex flex-col gap-2 w-32 py-3 px-5 bg-white/90 backdrop-blur-lg 
-                                                      shadow-lg rounded-xl border border-white/20'>
-                                            <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
-                                                My Profile
-                                            </p>
-                                            <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
-                                                Orders
-                                            </p>
-                                            <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
-                                                Logout
-                                            </p>
+                                        <div className='relative bg-white/90 backdrop-blur-lg shadow-lg rounded-xl border border-white/20'>
+                                            <div className='flex flex-col gap-2 w-32 py-3 px-5'>
+                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                    My Profile
+                                                </p>
+                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                    Orders
+                                                </p>
+                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                    Logout
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -122,8 +171,11 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Menu */}
-                        <div className={`fixed inset-0 bg-black/50 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                            <div className={`absolute top-0 right-0 bottom-0 w-64 bg-white transition-transform duration-300 ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
+                        <div className={`fixed inset-0 bg-black/50 transition-opacity duration-300 z-[60] 
+                                        ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                            <div className={`absolute top-0 right-0 bottom-0 w-64 bg-white shadow-xl 
+                                            transition-transform duration-300 
+                                            ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
                                 <div className='flex flex-col text-gray-600'>
                                     <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-50'>
                                         <img src={assets.dropdown_icon} className='h-4 rotate-180' alt="" />
@@ -155,9 +207,9 @@ const Navbar = () => {
                     </div>
 
                     {/* Enhanced Bottom Border Effect */}
-                    <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/20 to-transparent'></div>
-                    <div className='absolute -bottom-[4px] left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-pink-300/10 to-transparent blur-sm'></div>
-                    <div className='absolute -bottom-[8px] left-0 right-0 h-[8px] bg-gradient-to-b from-white/50 to-transparent blur-md'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/20 to-transparent z-40'></div>
+                    <div className='absolute -bottom-[4px] left-0 right-0 h-[4px] bg-gradient-to-r from-transparent via-pink-300/10 to-transparent blur-sm z-40'></div>
+                    <div className='absolute -bottom-[8px] left-0 right-0 h-[8px] bg-gradient-to-b from-white/50 to-transparent blur-md z-40'></div>
                 </div>
             </div>
         </>
@@ -165,7 +217,6 @@ const Navbar = () => {
 }
 
 export default Navbar
-
 
 
 
