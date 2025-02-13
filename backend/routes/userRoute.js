@@ -4,9 +4,10 @@ import { loginUser, registerUser, adminLogin } from '../controllers/userControll
 
 const userRouter = express.Router();
 
-userRouter.post('/register', registerUser);
-userRouter.post('/login', loginUser);
-userRouter.post('/admin', adminLogin);
+userRouter.post("/register", registerUser);
+userRouter.post("/login", loginUser);
+userRouter.post("/admin", adminLogin);
+
 
 export default userRouter;  // export the router for use in other parts of the application
 
