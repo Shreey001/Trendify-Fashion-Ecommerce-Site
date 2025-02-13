@@ -7,16 +7,23 @@ import userRouter from './routes/userRoute.js';
 
 // App config
 const app = express();
+
+
+
+
 const port = process.env.PORT || 4000;
 connectDB()
 connectCloudnary()
 
-//api endpoint
-app.use('/api/users', userRouter)
-
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors());  // Optional if dealing with frontend requests
+app.use(express.json());  // ✅ Ensures JSON body parsing
+app.use(express.urlencoded({ extended: true })); // ✅ Handles form data
+
+//api endpoint
+app.use('/api/user', userRouter)
+
+
 
 // Api endpoints
 app.get('/', (req, res) => {
