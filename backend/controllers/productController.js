@@ -58,7 +58,7 @@ const addProduct = async (req, res) => {
 
 // function for list products(get)
 
-const listProduct = async (req, res) => {
+const listProducts = async (req, res) => {
     
 try {
     const products = await productModel.find({});
@@ -121,4 +121,4 @@ try {
 
 
 
-export {listProduct,addProduct,removeProduct,singleProduct}
+export {listProducts,addProduct,removeProduct,singleProduct}
