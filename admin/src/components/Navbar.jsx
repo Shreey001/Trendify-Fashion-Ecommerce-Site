@@ -1,11 +1,11 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 
-const Navbar = () => {
+const Navbar = () => {  
   return (
-    <div>
-      <img src={assets.logo} alt="" />
-      <button>Logout</button>
+    <div className='flex items-center py-2 px-[4%] justify-between'>
+      <img className='w-35 h-12 sm:w-50 sm:h-18 drop-shadow-sm' src={assets.logo} alt="" />
+          <button className='bg-gray-600 px-5 py-2 sm:px-7 sm:py-2 rounded-full text-white text-xs sm:text-sm '>Logout</button>
     </div>
   )
 }
