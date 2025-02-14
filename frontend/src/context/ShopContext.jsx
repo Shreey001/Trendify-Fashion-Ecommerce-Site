@@ -54,7 +54,7 @@ const ShopContextProvider = (props) => {
       newCart[itemId][size] = (newCart[itemId][size] || 0) + 1
       return newCart
     })
-    toast.success('Added to cart')
+   
   }
 
   const removeFromCart = (itemId, size) => {
