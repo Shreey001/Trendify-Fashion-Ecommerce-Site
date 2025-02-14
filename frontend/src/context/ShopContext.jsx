@@ -1,8 +1,8 @@
 import {createContext, useEffect, useState} from "react";
-import { products } from "../assets/assets";
-import cart from "../pages/Cart.jsx";
+// import { products } from "../assets/assets";
 import {toast} from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ShopContext = createContext();
@@ -11,9 +11,11 @@ const ShopContextProvider = (props) => {
     
     const currency = 'Rs.';
     const delivery_fee = 110;
+ const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
     const addToCart = async (itemId,size) => {
@@ -86,10 +88,25 @@ const getCartAmount = () => {
     }
     return totalAmount;
 };
+    
+    const getProductsData = async () => {
+        try {
+            const response = await axios.get(backendUrl + 'api/product/list')
+            console.log(response.data)
+            
+        } catch (error) {
+            
+        }
+
+    }
+    useEffect(() => {
+        getProductsData();
+    }, [])
+    
 
     const value = {
 products,currency,delivery_fee,search,showSearch,setSearch,setShowSearch,cartItems,setCartItems,addToCart,getCartCount
-,updateQuantity,getCartAmount,navigate
+,updateQuantity,getCartAmount,navigate,backendUrl
 
     }
     return (
