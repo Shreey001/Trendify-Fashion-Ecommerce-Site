@@ -3,35 +3,98 @@ import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import OrderInfo from '../components/OrderInfo'
 import { ShopContext } from '../context/ShopContext'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState('cod')
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    street: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: ''
-  })
-
-  const { navigate } = useContext(ShopContext);
+  const { navigate,backendUrl,token,cartItems,setCartItems,getCartItems,getCartAmount,delivery_fee,productsData,products } = useContext(ShopContext);
 
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
+const [formData,setFormData] = useState({
+  firstName:'',
+  lastName:'',
+  email:'',
+  phone:'',
+  street:'',
+  city:'',
+  zipCode:'',
+  country:'',
+  state:''
+})
+
+  
+  const onChangeHandler = (e) => {
+    const name= e.target.name;
+    const value= e.target.value;
+
+    setFormData((data)=>({
+      ...data,
+      [name]:value
     }))
+
   }
 
+const onSubmitHandler = async (event) => {
+  event.preventDefault();
+  try {
+    let orderItems=[]
+
+    for (const items in cartItems){
+    for (const item in cartItems[items]){
+      if (cartItems[items][item] > 0){
+
+        const itemInfo = structuredClone(products.find(product=>product._id === items))
+        if (itemInfo){
+          itemInfo.size= item
+          itemInfo.quantity= cartItems[items][item]
+          orderItems.push(itemInfo)
+        }
+      }
+    }
+    }
+let orderData= {
+  address: formData,
+  items:orderItems,
+  amount:getCartAmount()+delivery_fee,
+}
+switch (method){
+  //api calls for cod
+  case 'cod':
+    const response= await axios.post(backendUrl+'/api/order/place',orderData,
+      {
+        headers:{token}
+      }
+    )
+    console.log(response);
+    if (response.data.success){
+      setCartItems({})
+      navigate('/orders')
+      
+    }
+    else{
+      toast.error(response.data.message)
+    }
+
+  break;
+
+  default:
+    break;
+
+}
+
+
+  } catch (error) {
+   
+    
+  }
+}
+
+
+ 
 
   return (
-    <div className='min-h-screen bg-gray-50/30'>
+    <form className='min-h-screen bg-gray-50/30' onSubmit={onSubmitHandler}>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         {/* Header Section */}
         <div className='text-center py-12 relative mb-16'>
@@ -61,13 +124,16 @@ const PlaceOrder = () => {
                   <div>
                     <label className='block text-sm font-medium text-gray-700 mb-2'>First Name</label>
                     <input 
+                    onChange={onChangeHandler}
+
                       name='firstName'
                       value={formData.firstName}
-                      onChange={handleInputChange}
+                      
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='Ram'
+                      required
                     />
                   </div>
                   <div>
@@ -75,11 +141,12 @@ const PlaceOrder = () => {
                     <input 
                       name='lastName'
                       value={formData.lastName}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='Bahadur'
+                      required
                     />
                   </div>
                 </div>
@@ -91,11 +158,12 @@ const PlaceOrder = () => {
                     <input 
                       name='email'
                       value={formData.email}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='email' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='ramey@gmail.com'
+                      required
                     />
                   </div>
                   <div>
@@ -103,11 +171,12 @@ const PlaceOrder = () => {
                     <input 
                       name='phone'
                       value={formData.phone}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='tel' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='+977 98XXXXXXXX'
+                      required
                     />
                   </div>
                 </div>
@@ -118,11 +187,12 @@ const PlaceOrder = () => {
                   <input 
                     name='street'
                     value={formData.street}
-                    onChange={handleInputChange}
+                    onChange={onChangeHandler}
                     type='text' 
                     className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                              focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                     placeholder='Pallo Galli'
+                    required
                   />
                 </div>
 
@@ -132,11 +202,12 @@ const PlaceOrder = () => {
                     <input 
                       name='city'
                       value={formData.city}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='Butwali'
+                      required
                     />
                   </div>
                   <div>
@@ -144,11 +215,12 @@ const PlaceOrder = () => {
                     <input 
                       name='state'
                       value={formData.state}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='Lumbini'
+                      required
                     />
                   </div>
                   <div>
@@ -156,11 +228,12 @@ const PlaceOrder = () => {
                     <input 
                       name='zipCode'
                       value={formData.zipCode}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='363636'
+                      required
                     />
                   </div>
                   <div>
@@ -168,11 +241,12 @@ const PlaceOrder = () => {
                     <input 
                       name='country'
                       value={formData.country}
-                      onChange={handleInputChange}
+                      onChange={onChangeHandler}
                       type='text' 
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500 
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='Nepal'
+                      required
                     />
                   </div>
                 </div>
@@ -237,7 +311,7 @@ const PlaceOrder = () => {
             <div className='bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-24'>
               <OrderInfo formData={formData} />
               <CartTotal />
-              <button onClick={()=>navigate('/orders')}
+              <button type='submit'
                 className='w-full mt-6 bg-black text-white rounded-full py-3 px-8 font-medium
                          transition-all duration-300 hover:bg-gray-800 hover:shadow-lg 
                          hover:-translate-y-0.5 focus:ring-2 focus:ring-gray-200'
@@ -248,7 +322,7 @@ const PlaceOrder = () => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 

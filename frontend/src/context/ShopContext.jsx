@@ -186,7 +186,7 @@ const getUserCart = async ( token ) => {
 
     const value = {
 products,currency,delivery_fee,search,showSearch,setSearch,setShowSearch,cartItems,setCartItems,addToCart,getCartCount
-,updateQuantity,getCartAmount,navigate,backendUrl,token,setToken
+,updateQuantity,getCartAmount,navigate,backendUrl,token,setToken,setCartItems
 
     }
     return (
