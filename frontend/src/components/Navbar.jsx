@@ -5,7 +5,16 @@ import { ShopContext } from '../context/ShopContext'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
-    const { setShowSearch, getCartCount } = useContext(ShopContext)
+    const { setShowSearch, getCartCount,navigate,setToken,token,setCartItems } = useContext(ShopContext)
+
+    const Logout = () => {
+        navigate('/login');
+       
+        localStorage.removeItem('token');
+        setToken('');
+        setCartItems({});
+       
+    }
 
     return (
         <>
@@ -120,14 +129,15 @@ const Navbar = () => {
                             
                             <div className='group relative z-50'>
                                 <button className='p-2 hover:bg-pink-300 rounded-full transition-all duration-300'>
-                                  <Link to="/login"> <img 
+                               <img onClick={()=> token ? null : navigate('/login')}
                                         src={assets.profile_icon} 
                                         className='w-8 sm:w-5 cursor-pointer transition-all duration-300 hover:scale-110 hover:opacity-70' 
                                         alt="" 
                                     /> 
-                                </Link>
+                                
                                 </button>
-                                <div className='invisible group-hover:visible opacity-0 group-hover:opacity-100 
+                                {token &&
+                                    <div className='invisible group-hover:visible opacity-0 group-hover:opacity-100 
                                                 absolute dropdown-menu right-0 top-full mt-1
                                                 transition-all duration-300 transform origin-top scale-95 group-hover:scale-100'>
                                     <div className='relative pt-2'>
@@ -137,16 +147,17 @@ const Navbar = () => {
                                                 <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
                                                     My Profile
                                                 </p>
-                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                <p onClick={()=> navigate('/orders')} className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
                                                     Orders
                                                 </p>
-                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                <p onClick={Logout} className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
                                                     Logout
                                                 </p>
                                             </div>
-                                        </div>
+                                        </div> 
+                                
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                             <Link to='/cart' className='relative p-2 hover:bg-white/50 rounded-full transition-all duration-300'>

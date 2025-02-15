@@ -1,24 +1,76 @@
-import React, { useState } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import SignupPreview from '../components/SignupPreview'
+import { ShopContext } from '../context/ShopContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+
+
 
 const Login = () => {
-  const [currentState, setCurrentState] = useState('Sign Up')
+  const [currentState, setCurrentState] = useState('Login')
+  const {setToken,token,navigate,backendUrl} = useContext(ShopContext);
+
+  const[name,setName] = useState('');
+  const[email,setEmail] = useState('');
+  const[password,setPassword] = useState('');
+
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   })
   
-  const onSubmitHandler = (event) => { 
+  const onSubmitHandler = async(event) => { 
     event.preventDefault()
-  }
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+    try {
+      if (currentState === 'Sign Up') {
+        const response = await axios.post(backendUrl + '/api/user/register',{ name,email,password})
+        
+
+        if(response.data.success){
+          setToken(response.data.token);
+          localStorage.setItem('token',response.data.token);
+          
+        }else{
+          toast.error(response.data.message);
+        }
+
+      }
+      else{
+        const response = await axios.post(backendUrl + '/api/user/login',{ email,password})
+        if(response.data.success){
+          setToken(response.data.token);
+          localStorage.setItem('token',response.data.token);
+        }else{
+          toast.error(response.data.message);
+        }
+      }
+      
+      
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+      
+      
+    }
   }
+  useEffect(()=>{
+    if(token){
+      navigate('/');
+    }
+  },[token]);
+
+ 
+
+  // const handleInputChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value
+  //   })
+  // }
 
   return (
     <div className='min-h-screen bg-gray-50/30'>
@@ -50,10 +102,11 @@ const Login = () => {
                   <div>
                     <label className='block text-sm font-medium text-gray-700 mb-2'>Full Name</label>
                     <input 
+                    onChange={(e)=>setName(e.target.value)}   value={name}
                       type='text'
                       name='name'
-                      value={formData.name}
-                      onChange={handleInputChange}
+                    
+                      // onChange={handleInputChange}
                       className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
                                focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                       placeholder='John Doe'
@@ -68,8 +121,7 @@ const Login = () => {
                   <input 
                     type='email'
                     name='email'
-                    value={formData.email}
-                    onChange={handleInputChange}
+                    onChange={(e)=>setEmail(e.target.value)}   value={email}
                     className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
                              focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                     placeholder='you@example.com'
@@ -83,8 +135,7 @@ const Login = () => {
                   <input 
                     type='password'
                     name='password'
-                    value={formData.password}
-                    onChange={handleInputChange}
+                    onChange={(e)=>setPassword(e.target.value)}   value={password}
                     className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
                              focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
                     placeholder='••••••••'
