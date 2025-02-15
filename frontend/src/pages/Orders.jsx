@@ -1,8 +1,43 @@
 import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
+import axios from 'axios';
+import { useState,useEffect } from 'react';
 
 const Orders = () => {
-  const { products, currency, navigate } = useContext(ShopContext)
+  const { backendUrl,token,currency, navigate } = useContext(ShopContext)
+
+  const[orderData,setOrderData] = useState([]);
+
+  const loadOrderData = async () => {
+    try {
+      if(!token) {
+        return null
+      }
+      const response = await axios.post(backendUrl + '/api/order/userorders',{},{headers:{token}})
+if(response.data.success) {
+  let allOrdersItem= []
+
+  response.data.orders.map((order) => {
+    order.items.map((item) => {
+      item['status'] = order.status;
+      item['payment']=order.payment;
+      item['paymentMethod']=order.paymentMethod;
+      item['date']=order.date
+      allOrdersItem.push(item)
+    })
+
+  })
+  setOrderData(allOrdersItem.reverse())
+}
+      
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    loadOrderData();
+  }, [token]);
 
   return (
     <div className='min-h-screen bg-gray-50/30'>
@@ -25,7 +60,8 @@ const Orders = () => {
 
         {/* Orders List */}
         <div className='space-y-6'>
-          {products.slice(1, 4).map((item, index) => (
+          {
+          orderData.map((item, index) => (
             <div 
               key={index}
               className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden 
@@ -40,7 +76,7 @@ const Orders = () => {
                   </div>
                   <div className='space-y-1'>
                     <p className='text-sm text-gray-500'>Order Date</p>
-                    <p className='font-medium'>25 Jul, 2024</p>
+                    <p className='font-medium'>{new Date(item.date).toDateString()}</p>
                   </div>
                   <div className='space-y-1'>
                     <p className='text-sm text-gray-500'>Total Amount</p>
@@ -48,7 +84,7 @@ const Orders = () => {
                   </div>
                   <div className='flex items-center gap-2 px-3 py-1 bg-green-50 rounded-full'>
                     <div className='w-2 h-2 rounded-full bg-green-500'></div>
-                    <p className='text-sm font-medium text-green-700'>Ready to ship</p>
+                    <p className='text-sm font-medium text-green-700'>{item.status}</p>
                   </div>
                 </div>
 
@@ -65,17 +101,20 @@ const Orders = () => {
                     </div>
                     <div className='flex-1'>
                       <h3 className='font-medium text-gray-900 mb-2'>{item.name}</h3>
-                      <div className='flex flex-wrap gap-4 text-sm text-gray-600'>
-                        <p>Quantity: 1</p>
-                        <p>Size: M</p>
+                      <div className='flex flex-wrap gap-4 text-sm text-gray-600 '>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Size: {item.size}</p>
                         <p>{currency}{item.price}</p>
+                        
+                        <p className='font-medium text-gray-500 text-sm '>Payment Method: <span className='font-bold text-pink-500'>{item.paymentMethod}</span></p>
+                        
                       </div>
                     </div>
                   </div>
 
                   {/* Action Button */}
                   <div className='md:ml-auto'>
-                    <button className='px-6 py-2 border border-gray-200 rounded-full text-sm font-medium
+                    <button onClick={loadOrderData} className='px-6 py-2 border border-gray-200 rounded-full text-sm font-medium
                                    hover:bg-gray-50 hover:border-gray-300 transition-all duration-300
                                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200'>
                       Track Order
@@ -88,7 +127,7 @@ const Orders = () => {
         </div>
 
         {/* Empty State */}
-        {products.length === 0 && (
+        {orderData.length === 0 && (
           <div className='text-center py-12'>
             <div className='w-24 h-24 mx-auto mb-6 text-gray-300'>
               <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
