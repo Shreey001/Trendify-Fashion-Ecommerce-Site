@@ -5,13 +5,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const ShopContext = createContext();
+ const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
+
+  
     
     const currency = 'Rs.';
     const delivery_fee = 110;
- const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+ const backendUrl = import.meta.env.VITE_BACKEND_URL;
+// console.log("Backend URL:", backendUrl); 
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
@@ -89,16 +93,25 @@ const getCartAmount = () => {
     return totalAmount;
 };
     
-    const getProductsData = async () => {
-        try {
-            const response = await axios.get(backendUrl + 'api/product/list')
-            console.log(response.data)
-            
-        } catch (error) {
-            
-        }
+const getProductsData = async () => {
+    try {
+        
+        const response = await axios.get(backendUrl + "/api/product/list");
+if (response.data.success) {
+    setProducts(response.data.products);
+} else {
+    toast.error(response.data.message);
+}
 
+
+       
+    } catch (error) {
+       console.log(error);
+       toast.error(error.message);
+       
     }
+};
+
     useEffect(() => {
         getProductsData();
     }, [])
@@ -115,5 +128,5 @@ products,currency,delivery_fee,search,showSearch,setSearch,setShowSearch,cartIte
     </ShopContext.Provider>
 )
 }
-export default ShopContextProvider;
+export { ShopContextProvider, ShopContext };
 
