@@ -4,7 +4,8 @@ import {toast} from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// eslint-disable-next-line react-refresh/only-export-components
+
+
  const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
@@ -46,6 +47,16 @@ if (!size) {
         }
         setCartItems(cartData);
 
+        if (token){
+            try {
+                await axios.post(backendUrl + '/api/cart/add',{itemId,size},{headers:{token}})
+            } catch (error) {
+                console.log(error);
+                toast.error(error.message)
+                
+            }
+        }
+        
 
     }
 
