@@ -7,7 +7,7 @@ const addToCart = async (req, res) => {
 
     const userData = await userModel.findById(userId);
     let cartData = await userData.cartData;
-        // console.log('Initial cartData:', cartData);
+    
 
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
@@ -22,16 +22,14 @@ const addToCart = async (req, res) => {
 
     // console.log(cartData);
     
-    await userModel.findByIdAndUpdate(
-      userId,
-      { cartData: cartData },
+    await userModel.findByIdAndUpdate(userId,{ cartData },
     );
     
-    // console.log('Updated user:', updatedUser);
+  
+res.json({ success: true, message: "Added to cart" });
 
-    res.json({ success: true, message: "Item added to cart" });
   } catch (error) {
-    console.log('Error in addToCart:', error);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -75,7 +73,7 @@ const getUserCart = async (req, res) => {
     const userData = await userModel.findById(userId);
 let cartData = await userData.cartData;
 
-    res.json({ success: true,cartData });
+    res.json({ success: true,cartData});
   } 
   catch (error) {
     console.log(error);
