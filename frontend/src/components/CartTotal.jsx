@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
 
@@ -7,19 +6,27 @@ const CartTotal = () => {
 
   const getTotalCartAmount = () => {
     let totalAmount = 0
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          let itemInfo = products.find((product) => product._id === items)
-          totalAmount += itemInfo.price * cartItems[items][item]
+    try {
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            let itemInfo = products.find((product) => product._id === items)
+            // Only add to total if product exists
+            if (itemInfo) {
+              totalAmount += itemInfo.price * cartItems[items][item]
+            }
+          }
         }
       }
+    } catch (error) {
+      console.error("Error calculating cart total:", error)
     }
     return totalAmount
   }
 
-  const shipping = getTotalCartAmount() > 1000 ? 0 : 100
-  const total = getTotalCartAmount() + shipping
+  const cartTotal = getTotalCartAmount()
+  const shipping = cartTotal > 1000 ? 0 : 100
+  const total = cartTotal + shipping
 
   return (
     <div className='space-y-4'>
@@ -31,7 +38,7 @@ const CartTotal = () => {
       <div className='space-y-3 text-gray-600'>
         <div className='flex justify-between'>
           <span>Subtotal</span>
-          <span className='font-medium'>{currency}{getTotalCartAmount()}</span>
+          <span className='font-medium'>{currency}{cartTotal}</span>
         </div>
         
         <div className='flex justify-between'>
@@ -41,9 +48,9 @@ const CartTotal = () => {
           </span>
         </div>
 
-        {shipping > 0 && (
+        {shipping > 0 && cartTotal > 0 && (
           <p className='text-sm text-pink-500'>
-            Add {currency}{1000 - getTotalCartAmount()} more for free shipping
+            Add {currency}{1000 - cartTotal} more for free shipping
           </p>
         )}
         
