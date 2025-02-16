@@ -1,4 +1,3 @@
-
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
@@ -199,4 +198,22 @@ const updateStatus = async (req,res) => {
 
 }
 
-export {placeOrder,placeOrderStripe,placeOrderRazorpay,allOrders,userOrders,updateStatus,verifyStripe};
+//Delete order from admin panel
+const deleteOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    
+    const deletedOrder = await orderModel.findByIdAndDelete(orderId);
+    
+    if (!deletedOrder) {
+      return res.json({ success: false, message: "Order not found" });
+    }
+    
+    res.json({ success: true, message: "Order deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Failed to delete order" });
+  }
+};
+
+export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe, deleteOrder };
