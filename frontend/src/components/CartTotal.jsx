@@ -18,7 +18,7 @@ const CartTotal = () => {
     return totalAmount
   }
 
-  const shipping = getTotalCartAmount() > 1000 ? 0 : 100
+  const shipping = getTotalCartAmount() > 4000 ? 0 : 100
   const total = getTotalCartAmount() + shipping
 
   return (
@@ -43,7 +43,7 @@ const CartTotal = () => {
 
         {shipping > 0 && (
           <p className='text-sm text-pink-500'>
-            Add {currency}{1000 - getTotalCartAmount()} more for free shipping
+            Add {currency}{4000 - getTotalCartAmount()} more for free shipping
           </p>
         )}
         
