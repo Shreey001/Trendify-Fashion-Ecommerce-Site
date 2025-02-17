@@ -125,6 +125,15 @@ const adminLogin = async (req, res) => {
 
 }
 
+// Get all users for admin
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await userModel.find({}, { password: 0 }); // Exclude password field
+        res.json({ success: true, users });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
 
-
-export { loginUser, registerUser, adminLogin }
+export { loginUser, registerUser, adminLogin, getAllUsers }

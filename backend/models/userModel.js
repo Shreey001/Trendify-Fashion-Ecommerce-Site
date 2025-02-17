@@ -4,13 +4,11 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-   
     cartData: { type: Object, default: {} }
-
-
-
-
-}, { minimize: false }) // minimize the creation of the schema  object 
+}, { 
+    minimize: false,
+    timestamps: true 
+}) // minimize the creation of the schema object and add timestamps
 
 const userModel = mongoose.models.user || mongoose.model('user', userSchema);
 
