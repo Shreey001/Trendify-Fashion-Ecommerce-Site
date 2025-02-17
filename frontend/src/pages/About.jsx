@@ -66,14 +66,16 @@ const About = () => {
                 </div>
                 
                 <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
-                    <h1 className='text-4xl md:text-6xl font-bold mb-6'>
-                        Crafting
-                        <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 mx-3'>
+                    <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6'>
+                        <span className='block sm:inline'>Crafting</span>
+                        <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 
+                                       block sm:inline mx-0 sm:mx-3 my-2 sm:my-0'>
                             Fashion
                         </span>
-                        Stories
+                        <span className='block sm:inline'>Stories</span>
                     </h1>
-                    <p className='text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed'>
+                    <p className='text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed
+                                 px-4 sm:px-6'>
                         Since 2024, we've been transforming the way Nepal shops for fashion, 
                         making style accessible to everyone.
                     </p>
