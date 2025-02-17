@@ -295,7 +295,7 @@ const About = () => {
                                         {/* Member Quote */}
                                         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 text-center
                                                       transform opacity-0 group-hover:opacity-100 transition-all duration-500
-                                                      translate-y-8 group-hover:translate-y-0'>
+                                                       group-hover:translate-y-0'>
                                             <p className='text-white text-sm md:text-base italic'>
                                                 "{member.quote}"
                                             </p>
