@@ -95,7 +95,8 @@ else{
 
 
 
-break;
+    break;
+  
 
   default:
     break;
@@ -295,14 +296,14 @@ break;
                 </div>
 
                 <div 
-                  onClick={() => setMethod('razorpay')}
+                  onClick={() => setMethod('khalti')}
                   className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer
-                            ${method === 'razorpay' 
+                            ${method === 'khalti' 
                               ? 'border-purple-700 bg-blue-50/50' 
                               : 'border-gray-200 hover:border-pink-200'}`}
                 >
                   <div className={`w-4 h-4 rounded-full border-2
-                                ${method === 'razorpay' 
+                                ${method === 'khalti' 
                                   ? 'border-purple-700 bg-purple-700' 
                                   : 'border-gray-300'}`} 
                   />

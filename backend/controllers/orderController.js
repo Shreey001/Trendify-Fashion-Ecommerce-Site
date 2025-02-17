@@ -143,9 +143,9 @@ const verifyStripe = async (req,res) => {
 
 
 
-//placing order using razorpay payment
+//placing order using Khaltipay payment
 
-const placeOrderRazorpay = async (req,res) => {
+const placeOrderKhalti = async (req,res) => {
 
 
 
@@ -216,4 +216,4 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe, deleteOrder };
+export { placeOrder, placeOrderStripe, placeOrderKhalti, allOrders, userOrders, updateStatus, verifyStripe, deleteOrder };
