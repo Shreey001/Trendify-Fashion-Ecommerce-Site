@@ -2,7 +2,7 @@
 
 <div align="center">
   <div style="background-color: white; padding: 10px; border-radius: 10px;">
-    <img src="frontend/src/assets/logo.png" alt="Trendify Logo" width="200"/>
+    <img src="frontend/src/assets/logo-white-bg.png" alt="Trendify Logo" width="200"/>
   </div>
   
   ![GitHub](https://img.shields.io/github/license/Shreey001/Trendify-Fashion-Ecommerce-Site)
