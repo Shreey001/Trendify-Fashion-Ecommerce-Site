@@ -15,13 +15,24 @@ const Login = () => {
   const[email,setEmail] = useState('');
   const[password,setPassword] = useState('');
 
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   })
   
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    // Also update individual state for backward compatibility
+    if (name === 'name') setName(value);
+    if (name === 'email') setEmail(value);
+    if (name === 'password') setPassword(value);
+  }
+
   const onSubmitHandler = async(event) => { 
     event.preventDefault()
 
@@ -65,13 +76,6 @@ const Login = () => {
 
  
 
-  // const handleInputChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
-
   return (
     <div className='min-h-screen bg-gray-50/30'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
@@ -100,46 +104,50 @@ const Login = () => {
                 {/* Name Input - Only for Sign Up */}
                 {currentState !== 'Login' && (
                   <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>Full Name</label>
-                    <input 
-                    onChange={(e)=>setName(e.target.value)}   value={name}
-                      type='text'
-                      name='name'
-                    
-                      // onChange={handleInputChange}
-                      className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
-                               focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                      placeholder='John Doe'
-                      required 
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-pink-500 sm:text-sm"
+                      required={currentState === 'Sign Up'}
                     />
                   </div>
                 )}
 
                 {/* Email Input */}
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>Email Address</label>
-                  <input 
-                    type='email'
-                    name='email'
-                    onChange={(e)=>setEmail(e.target.value)}   value={email}
-                    className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
-                             focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                    placeholder='you@example.com'
-                    required 
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-pink-500 sm:text-sm"
+                    required
                   />
                 </div>
 
                 {/* Password Input */}
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>Password</label>
-                  <input 
-                    type='password'
-                    name='password'
-                    onChange={(e)=>setPassword(e.target.value)}   value={password}
-                    className='w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-pink-500
-                             focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-300'
-                    placeholder='••••••••'
-                    required 
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:outline-none focus:ring-pink-500 sm:text-sm"
+                    required
                   />
                 </div>
 
@@ -168,13 +176,9 @@ const Login = () => {
               </form>
             </div>
           </div>
-
-          {/* Preview Section - Only show during signup */}
-          {currentState !== 'Login' && (
-            <div className='w-[400px] hidden lg:block'>
-              <SignupPreview formData={formData} />
-            </div>
-          )}
+          
+          {/* Preview Section - Only show in Sign Up mode */}
+          {currentState === 'Sign Up' && <SignupPreview formData={formData} />}
         </div>
       </div>
     </div>
