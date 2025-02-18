@@ -1,7 +1,7 @@
 # 🛍️ Trendify - Modern Fashion E-commerce Platform
 
 <div align="center">
-  <img src="frontend/src/assets/logo.png" alt="Trendify Logo" width="200"/>
+  <img src="frontend/src/assets/logo.png" alt="Trendify Logo" width="200" style="background-color: white "/>
   
   ![GitHub](https://img.shields.io/github/license/Shreey001/Trendify-Fashion-Ecommerce-Site)
   ![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)
