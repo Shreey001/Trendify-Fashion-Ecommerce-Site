@@ -14,34 +14,42 @@ const Verify = () => {
     const orderId = searchParams.get('orderId');
 
     const verifyPayment = async () => {
-
         try {
-            
-            if(!token){
-                return null
+            if (!token) {
+                toast.error('Authentication required');
+                navigate('/login');
+                return;
             }
 
-            const response = await axios.post(backendUrl + '/api/order/verifyStripe',{success,orderId},{headers:{token}})
+            if (!orderId) {
+                toast.error('Invalid order information');
+                navigate('/cart');
+                return;
+            }
 
-            if (response.data.success){
+            const response = await axios.post(
+                backendUrl + '/api/order/verifyStripe',
+                { success, orderId },
+                { headers: { token } }
+            );
+
+            if (response.data.success) {
                 setCartItems({});
-                navigate('/orders');
-
+                toast.success('Payment successful!');
+                // Add a small delay to ensure the order is saved
+                setTimeout(() => {
+                    navigate('/orders');
+                }, 1500);
+            } else {
+                toast.error(response.data.message || 'Payment verification failed');
+                navigate('/cart');
             }
-            else{
-                navigate('/cart')
-            }
-
-          
-            
-
         } catch (error) {
-            
-            console.log(error);
-            toast.error(error.message);
-
-
-    }}
+            console.error('Payment verification error:', error);
+            toast.error(error.response?.data?.message || 'Failed to verify payment');
+            navigate('/cart');
+        }
+    }
 
     useEffect(() => {
         if (token) {

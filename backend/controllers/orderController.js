@@ -53,19 +53,23 @@ const placeOrder = async (req,res) => {
 
 const placeOrderStripe = async (req,res) => {
     try {
-
-        const {userId,items,amount,address} = req.body;
-
+        const userId = req.user._id; // Get userId from authenticated request
+        const {items, amount, address} = req.body;
         const {origin} = req.headers;
+
+        if (!userId || !items || !amount || !address) {
+            return res.json({success: false, message: 'Missing required order information'});
+        }
 
         const orderData = {
             userId,
             items,
             amount,
             address,
-            paymentMethod:'Stripe',
-            payment:false,
-            date:Date.now()
+            paymentMethod: 'Stripe',
+            payment: false,
+            date: Date.now(),
+            status: 'Order Placed'
         }
 
         const newOrder = new orderModel(orderData);
@@ -120,27 +124,22 @@ quantity:1
 //verify stripe payment
 
 const verifyStripe = async (req,res) => {
-
-    const {orderId,success,userId} = req.body;
+    const {orderId, success} = req.body;
+    const userId = req.user._id; // Get userId from authenticated request
 
     try {
-        if (success=== 'true'){
-            await orderModel.findByIdAndUpdate(orderId,{payment:true});
-            await userModel.findByIdAndUpdate(userId,{cartData:{}});
-            res.json({success:true});
-        }
-        else{
+        if (success === 'true' || success === true) {
+            await orderModel.findByIdAndUpdate(orderId, {payment: true});
+            await userModel.findByIdAndUpdate(userId, {cartData: []});
+            res.json({success: true, message: 'Payment verified successfully'});
+        } else {
             await orderModel.findByIdAndDelete(orderId);
-            res.json({success:false});
-
-
+            res.json({success: false, message: 'Payment verification failed'});
         }
         
     } catch (error) {
-        
         console.log(error);
-        res.json({success:false,message:error.message});
-
+        res.json({success:false, message:error.message});
     }
 }
 

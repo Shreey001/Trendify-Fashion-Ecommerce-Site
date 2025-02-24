@@ -81,16 +81,24 @@ switch (method){
 
 case 'stripe':
 
-const responseStripe= await axios.post(backendUrl+'/api/order/stripe',orderData,{headers:{token}})
+try {
+  const responseStripe = await axios.post(
+    backendUrl + '/api/order/stripe',
+    orderData,
+    {headers: {token}}
+  );
 
-if (responseStripe.data.success){
- const {session_url}= responseStripe.data;
- window.location.replace(session_url)
-
-
-}
-else{
-  toast.error(responseStripe.data.message)
+  if (responseStripe.data.success) {
+    const {session_url} = responseStripe.data;
+    // Clear cart before redirecting
+    setCartItems({});
+    window.location.replace(session_url);
+  } else {
+    toast.error(responseStripe.data.message || 'Failed to create Stripe session');
+  }
+} catch (error) {
+  console.error('Stripe payment error:', error);
+  toast.error(error.response?.data?.message || 'Failed to process payment');
 }
 
 

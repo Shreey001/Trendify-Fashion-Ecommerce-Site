@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const Orders = () => {
   const { backendUrl,token,currency, navigate } = useContext(ShopContext)
@@ -10,7 +11,8 @@ const Orders = () => {
 
   const loadOrderData = async () => {
     try {
-      if (!token) {
+      const localToken = localStorage.getItem('token');
+      if (!token && !localToken) {
         navigate('/login');
         return;
       }
@@ -18,27 +20,38 @@ const Orders = () => {
       const response = await axios.post(
         backendUrl + '/api/order/userorders',
         {},
-        { headers: { token } }
+        { headers: { token: token || localToken } }
       );
 
       if (response.data.success) {
         let allOrdersItem = [];
-        response.data.orders.forEach((order) => {
-          order.items.forEach((item) => {
-            allOrdersItem.push({
-              ...item,
-              status: order.status,
-              payment: order.payment,
-              paymentMethod: order.paymentMethod,
-              date: order.date,
-              orderId: order._id
-            });
+        if (response.data.orders && response.data.orders.length > 0) {
+          response.data.orders.forEach((order) => {
+            if (order.items && Array.isArray(order.items)) {
+              order.items.forEach((item) => {
+                allOrdersItem.push({
+                  ...item,
+                  status: order.status || 'Processing',
+                  payment: order.payment,
+                  paymentMethod: order.paymentMethod,
+                  date: order.date,
+                  orderId: order._id,
+                  totalAmount: order.amount || 0,
+                  price: item.price || 0
+                });
+              });
+            } else {
+              console.warn('Order has no items or invalid items:', order);
+            }
           });
-        });
+        }
         setOrderData(allOrdersItem);
+      } else {
+        toast.error(response.data.message || 'Failed to fetch orders');
       }
     } catch (error) {
       console.error('Error loading orders:', error);
+      toast.error('Failed to load orders. Please try again.');
     }
   }
 
@@ -79,7 +92,7 @@ const Orders = () => {
                 <div className='flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100'>
                   <div className='space-y-1'>
                     <p className='text-sm text-gray-500'>Order ID</p>
-                    <p className='font-medium'>#{(Math.random() * 1000000).toFixed(0)}</p>
+                    <p className='font-medium'>#{item.orderId}</p>
                   </div>
                   <div className='space-y-1'>
                     <p className='text-sm text-gray-500'>Order Date</p>
@@ -87,7 +100,7 @@ const Orders = () => {
                   </div>
                   <div className='space-y-1'>
                     <p className='text-sm text-gray-500'>Total Amount</p>
-                    <p className='font-medium'>{currency}{item.price}</p>
+                    <p className='font-medium'>{currency}{item.totalAmount || item.price}</p>
                   </div>
                   <div className='flex items-center gap-2 px-3 py-1 bg-green-50 rounded-full'>
                     <div className='w-2 h-2 rounded-full bg-green-500'></div>
