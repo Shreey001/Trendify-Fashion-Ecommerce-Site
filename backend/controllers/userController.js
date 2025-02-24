@@ -136,4 +136,94 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser, adminLogin, getAllUsers }
+// Update user profile
+const updateProfile = async (req, res) => {
+    try {
+        const { phoneNumber, name, currentPassword, newPassword } = req.body;
+        const userId = req.user._id;
+
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.json({ success: false, message: 'User not found' });
+        }
+
+        // Update password if provided
+        if (currentPassword && newPassword) {
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
+            if (!isMatch) {
+                return res.json({ success: false, message: 'Current password is incorrect' });
+            }
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(newPassword, salt);
+        }
+
+        // Update name if provided
+        if (name) {
+            user.name = name;
+        }
+
+        // Update phone number if provided
+        if (phoneNumber) {
+            user.phoneNumber = phoneNumber;
+        }
+
+        await user.save();
+
+        // Return user without password
+        const updatedUser = await userModel.findById(userId).select('-password');
+        res.json({ success: true, user: updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// Upload profile image
+const uploadProfileImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.json({ success: false, message: 'No file uploaded' });
+        }
+
+        const userId = req.user._id;
+        const imageUrl = `${process.env.BACKEND_URL || 'http://localhost:4000'}/uploads/${req.file.filename}`;
+
+        const updatedUser = await userModel.findByIdAndUpdate(
+            userId,
+            { profileImage: imageUrl },
+            { new: true }
+        ).select('-password');
+
+        res.json({ success: true, imageUrl, user: updatedUser });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// Get user profile
+const getUserProfile = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await userModel.findById(userId).select('-password');
+        
+        if (!user) {
+            return res.json({ success: false, message: 'User not found' });
+        }
+
+        res.json({ success: true, user });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+export { 
+    loginUser, 
+    registerUser, 
+    adminLogin, 
+    getAllUsers,
+    updateProfile,
+    uploadProfileImage,
+    getUserProfile
+}

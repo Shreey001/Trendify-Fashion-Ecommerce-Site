@@ -11,6 +11,14 @@ import orderRouter from './routes/orderRoute.js';
 // App config
 const app = express();
 
+// Serve static files from public directory
+app.use('/uploads', express.static('public/uploads'));
+
+// Enable CORS for image requests
+app.use('/uploads', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 
 

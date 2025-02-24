@@ -144,7 +144,7 @@ const Navbar = () => {
                                         <div className='absolute -top-0 right-4 w-4 h-4 bg-white/90 transform rotate-45 border-l border-t border-white/20'></div>
                                         <div className='relative bg-white/90 backdrop-blur-lg shadow-lg rounded-xl border border-white/20'>
                                             <div className='flex flex-col gap-2 w-32 py-3 px-5'>
-                                                <p className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
+                                                <p onClick={() => navigate('/profile')} className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>
                                                     My Profile
                                                 </p>
                                                 <p onClick={()=> navigate('/orders')} className='cursor-pointer hover:text-pink-500 transition-colors duration-200 whitespace-nowrap'>

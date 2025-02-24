@@ -53,10 +53,10 @@ const onSubmitHandler = async (event) => {
       }
     }
     }
-let orderData= {
+let orderData = {
   address: formData,
-  items:orderItems,
-  amount:getCartAmount()+delivery_fee,
+  items: orderItems,
+  amount: getCartAmount() + delivery_fee
 }
 switch (method){
   //api calls for cod

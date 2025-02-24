@@ -21,7 +21,8 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
-    const[token,setToken] = useState('');
+    const [token, setToken] = useState('');
+    const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
 
     //add to cart function
@@ -175,19 +176,58 @@ const getUserCart = async ( token ) => {
     }, [])
 
 
-    useEffect(()=>{
-       
-        if(!token && localStorage.getItem('token')){
-            setToken(localStorage.getItem('token'));
-            getUserCart(localStorage.getItem('token'));
+    // Fetch user data
+    const fetchUserData = async (userToken) => {
+        try {
+            const response = await axios.get(backendUrl + '/api/user/profile', {
+                headers: { token: userToken }
+            });
+            if (response.data.success) {
+                setUserData(response.data.user);
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
         }
-    },[]);
+    };
+
+    useEffect(() => {
+        const savedToken = localStorage.getItem('token');
+        if (!token && savedToken) {
+            setToken(savedToken);
+            getUserCart(savedToken);
+            fetchUserData(savedToken);
+        }
+    }, []);
+
+    // Refetch user data when token changes
+    useEffect(() => {
+        if (token) {
+            fetchUserData(token);
+        }
+    }, [token]);
     
 
     const value = {
-products,currency,delivery_fee,search,showSearch,setSearch,setShowSearch,cartItems,setCartItems,addToCart,getCartCount
-,updateQuantity,getCartAmount,navigate,backendUrl,token,setToken
-
+        products,
+        currency,
+        delivery_fee,
+        search,
+        showSearch,
+        setSearch,
+        setShowSearch,
+        cartItems,
+        setCartItems,
+        addToCart,
+        getCartCount,
+        updateQuantity,
+        getCartAmount,
+        navigate,
+        backendUrl,
+        token,
+        setToken,
+        userData,
+        setUserData,
+        fetchUserData
     }
     return (
         <ShopContext.Provider value={value}>

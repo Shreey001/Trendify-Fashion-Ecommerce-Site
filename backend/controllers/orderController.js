@@ -15,8 +15,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const placeOrder = async (req,res) => {
     
     try {
+        const {items, amount, address} = req.body;
+        const userId = req.user._id; // Get userId from authenticated request
 
-        const {userId,items,amount,address} = req.body;
+        if (!userId || !items || !amount || !address) {
+            return res.json({success: false, message: 'Missing required order information'});
+        }
 
         const orderData = {
             userId,
@@ -170,16 +174,19 @@ try {
 //User Order data for frontend
 
 const userOrders = async (req,res) => {
-try {
-    const {userId} = req.body;
-    const orders = await orderModel.find({userId});
-    res.json({success:true,orders});
-} catch (error) {
-    console.log(error);
-    res.json({success:false,message:error.message});
-}
+    try {
+        const userId = req.user._id; // Get userId from authenticated request
+        
+        if (!userId) {
+            return res.json({success: false, message: 'User not authenticated'});
+        }
 
-
+        const orders = await orderModel.find({userId}).sort({date: -1}); // Sort by date descending
+        res.json({success:true, orders});
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message:error.message});
+    }
 }
 
 //Update order status from admin panel

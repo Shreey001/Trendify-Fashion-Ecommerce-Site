@@ -1,21 +1,21 @@
 import jwt from 'jsonwebtoken';
 
 
-const authUser = async(req,res,next) => {
-
+const authUser = async(req, res, next) => {
     const {token} = req.headers;
-    if(!token){
-        return res.json({success:false,message:'Please login to checkout'});
+    
+    if (!token) {
+        return res.json({success: false, message: 'Authentication required'});
     }
-        try {
-            const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-            req.body.userId = token_decode.id
-            next();
-        } catch (error) {
-            console.log(error);
-           res.json({success:false,message:error.message});
-        }
-    }
-   
 
-export default authUser; 
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = { _id: decoded.id }; // Add user info to request object
+        next();
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: 'Invalid or expired token'});
+    }
+};
+
+export default authUser;
