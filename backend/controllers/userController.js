@@ -1,6 +1,7 @@
 import validator from "validator";
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken';
+import { v2 as cloudinary } from "cloudinary";
 
 import userModel from "../models/userModel.js";
 
@@ -181,23 +182,28 @@ const updateProfile = async (req, res) => {
 // Upload profile image
 const uploadProfileImage = async (req, res) => {
     try {
-        if (!req.file) {
-            return res.json({ success: false, message: 'No file uploaded' });
+        if (!req.file || !req.file.buffer) {
+            return res.json({ success: false, message: 'No file uploaded or invalid file format' });
         }
 
         const userId = req.user._id;
-        const imageUrl = `${process.env.BACKEND_URL || 'http://localhost:4000'}/uploads/${req.file.filename}`;
+
+        // Upload to Cloudinary
+        const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`, {
+            folder: 'profile_images',
+            resource_type: 'image'
+        });
 
         const updatedUser = await userModel.findByIdAndUpdate(
             userId,
-            { profileImage: imageUrl },
+            { profileImage: result.secure_url },
             { new: true }
         ).select('-password');
 
-        res.json({ success: true, imageUrl, user: updatedUser });
+        res.json({ success: true, imageUrl: result.secure_url, user: updatedUser });
     } catch (error) {
-        console.error(error);
-        res.json({ success: false, message: error.message });
+        console.error('Profile image upload error:', error);
+        res.json({ success: false, message: 'Failed to upload image. Please try again.' });
     }
 };
 

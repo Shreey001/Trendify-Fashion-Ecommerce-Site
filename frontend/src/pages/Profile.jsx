@@ -3,6 +3,7 @@ import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 const Profile = () => {
   const { token, backendUrl, userData, setUserData, fetchUserData, currency } = useContext(ShopContext);
@@ -186,7 +187,7 @@ const Profile = () => {
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = 'https://via.placeholder.com/150?text=Profile';
+                      e.target.src = assets.profile_icon;
                     }}
                   />
                 ) : (
