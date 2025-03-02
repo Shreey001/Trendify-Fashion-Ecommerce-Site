@@ -22,6 +22,12 @@ const Add = ({token}) => {
     e.preventDefault();
 
     try {
+      // Validate at least one image is selected
+      if (!image1 && !image2 && !image3 && !image4) {
+        toast.error('Please select at least one image');
+        return;
+      }
+
       const formData = new FormData();
       formData.append("name", name);
       formData.append("description", description);
@@ -31,10 +37,11 @@ const Add = ({token}) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
 
-      if (image1) formData.append("image1", image1);
-      if (image2) formData.append("image2", image2);
-      if (image3) formData.append("image3", image3);
-      if (image4) formData.append("image4", image4);
+      // Append images with proper file objects
+      if (image1) formData.append("image1", image1, image1.name);
+      if (image2) formData.append("image2", image2, image2.name);
+      if (image3) formData.append("image3", image3, image3.name);
+      if (image4) formData.append("image4", image4, image4.name);
 
       // Make API call to add product
       const response = await axios.post(backendUrl + "/api/product/add", formData,{headers:{token}});

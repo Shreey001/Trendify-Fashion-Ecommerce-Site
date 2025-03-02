@@ -1,8 +1,15 @@
 import multer from "multer";
 import path from "path";
 
-// Configure multer to use memory storage for profile image uploads
-const storage = multer.memoryStorage();
+// Configure multer to use disk storage for temporary file storage
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+});
 
 const upload = multer({
     storage,
