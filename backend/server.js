@@ -40,7 +40,7 @@ app.use('/api/order',orderRouter)
 
 // Api endpoints
 app.get('/', (req, res) => {
-res.send("API Working")
+res.send("API Working...")
  
 });
 
